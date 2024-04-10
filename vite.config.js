@@ -10,43 +10,37 @@
 // on production everything will work just fine
 
 //import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-import liveReload from 'vite-plugin-live-reload'
-const { resolve } = require('path')
-const fs = require('fs')
-
+import { defineConfig } from "vite";
+import liveReload from "vite-plugin-live-reload";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { resolve } from "path";
+import { promises as fs } from "fs";
 
 // https://vitejs.dev/config
 export default defineConfig({
-
-  plugins: [
-    //vue(),
-    liveReload(__dirname+'/**/*.php')
-  ],
+  plugins: [svelte(), liveReload(__dirname + "/**/*.php")],
 
   // config
-  root: '',
-  base: process.env.NODE_ENV === 'development'
-    ? '/'
-    : '/dist/',
+  root: "",
+  base: process.env.NODE_ENV === "development" ? "/" : "/dist/",
 
   build: {
     // output dir for production build
-    outDir: resolve(__dirname, './dist'),
+    outDir: resolve(__dirname, "./dist"),
     emptyOutDir: true,
 
     // emit manifest so PHP can find the hashed files
     manifest: true,
 
     // esbuild target
-    target: 'es2018',
+    target: "es2018",
 
     // our entry
     rollupOptions: {
       input: {
-        main: resolve( __dirname + '/main.js')
+        main: resolve(__dirname + "/main.js"),
       },
-      
+
       /*
       output: {
           entryFileNames: `[name].js`,
@@ -57,11 +51,10 @@ export default defineConfig({
 
     // minifying switch
     minify: true,
-    write: true
+    write: true,
   },
 
   server: {
-
     // required to load scripts from custom host
     cors: true,
 
@@ -87,10 +80,9 @@ export default defineConfig({
     //},
 
     hmr: {
-      host: 'localhost',
+      host: "localhost",
       //port: 443
     },
-    
   },
 
   // required for in-browser template compilation
@@ -98,7 +90,6 @@ export default defineConfig({
   resolve: {
     alias: {
       //vue: 'vue/dist/vue.esm-bundler.js'
-    }
-  }
-})
-
+    },
+  },
+});
