@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function(){
+import "@picocss/pico";
+
+document.addEventListener("DOMContentLoaded", function () {
   // Handler when the DOM is fully loaded
-  console.log('js executed...');
+  console.log("js executed...");
 });
