@@ -58,5 +58,6 @@
         </div>
     </div>
 </div>
+<div id="svelte-slider"></div>
 
 <?php get_footer(); ?>

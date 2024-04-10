@@ -3,7 +3,7 @@
     get_header(); ?>
 
     <div>
-      <div style="background-image: url(<?php echo get_theme_file_uri('/assets/img/ocean.jpg') ?>"></div>
+      <div style="background-image: url(<?php echo get_theme_file_uri('/assets/img/ocean.jpg') ?>">
             <div>
                 <h1>
                     <?php the_archive_title(); ?>
@@ -28,7 +28,9 @@
                     </div>
                     <div class="generic-content">
                         <?php the_excerpt(); ?>
-                        <p><a class="btn" href="<?php the_permalink(); ?>">Continue reading &raquo;</a></p>
+                        <button>
+                            <a href="<?php the_permalink(); ?>">Continue reading &raquo;</a>
+                        </button>
                     </div>
             <?php }
             echo paginate_links();

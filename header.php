@@ -20,5 +20,4 @@
 
     
     <main class="container">
-        <div id="svelte-root"></div>
 
