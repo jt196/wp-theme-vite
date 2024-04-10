@@ -6,21 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head() ?>
 </head>
-<body <?php body_class('flex flex-col h-screen') ?>>
+<body>
 <?php wp_body_open(); ?>
 
-    <header class="flex-0 bg-slate-100 px-4 border shadow-md">
-        <div class="max-w-screen-lg mx-auto flex justify-between items-center min-h-[40px]">
-            <div class="">
-                <a href="<?php echo home_url() ?>">Logo</a>
-            </div>
-            <div>
-                <?php echo wp_nav_menu() ?>
-            </div>
-        </div>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="<?php echo home_url() ?>">Logo</a></li>
+            </ul>
+            <?php echo wp_nav_menu() ?>
+
+        </nav>
     </header>
 
-    <div id="svelte-root"></div>
-
-    <main class="flex-grow px-4 py-4">
+    
+    <main class="container">
+        <div id="svelte-root"></div>
 

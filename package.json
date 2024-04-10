@@ -9,15 +9,13 @@
   },
   "devDependencies": {
     "@picocss/pico": "^2.0.6",
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "autoprefixer": "^10.4.14",
     "cross-env": "^7.0.3",
     "postcss": "^8.4.21",
     "postcss-nested": "^6.0.1",
+    "svelte": "^4.2.12",
     "vite": "^5.2.8",
     "vite-plugin-live-reload": "^3.0.2"
-  },
-  "dependencies": {
-    "@sveltejs/vite-plugin-svelte": "^3.0.2",
-    "svelte": "^4.2.12"
   }
 }
