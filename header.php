@@ -20,5 +20,7 @@
         </div>
     </header>
 
+    <div id="svelte-root"></div>
+
     <main class="flex-grow px-4 py-4">
 
