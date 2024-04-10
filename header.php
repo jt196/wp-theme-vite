@@ -14,8 +14,7 @@
             <ul>
                 <li><a href="<?php echo home_url() ?>">Logo</a></li>
             </ul>
-            <?php echo wp_nav_menu() ?>
-
+            <?php wp_nav_menu(array('theme_location' => 'headerMenuLocation')); ?>
         </nav>
     </header>
 

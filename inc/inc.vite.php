@@ -25,6 +25,16 @@ define('JS_LOAD_IN_FOOTER', true); // load scripts in footer?
 define('VITE_SERVER', 'http://localhost:3000');
 define('VITE_ENTRY_POINT', '/main.js');
 
+
+function university_features() {
+    add_theme_support( 'title-tag' );
+    register_nav_menu( 'headerMenuLocation', 'Header Menu Location' );
+    register_nav_menu( 'footerLocation1', 'Footer Location 1' );
+    register_nav_menu( 'footerLocation2', 'Footer Location 2' );
+}
+
+add_action( 'after_setup_theme', 'university_features' );
+
 // enqueue hook
 add_action( 'wp_enqueue_scripts', function() {
     
@@ -34,7 +44,7 @@ add_action( 'wp_enqueue_scripts', function() {
         function vite_head_module_hook() {
             echo '<script type="module" crossorigin src="' . VITE_SERVER . VITE_ENTRY_POINT . '"></script>';
         }
-        add_action('wp_head', 'vite_head_module_hook');        
+        add_action('wp_head', 'vite_head_module_hook');
 
     } else {
 
