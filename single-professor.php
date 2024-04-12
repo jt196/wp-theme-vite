@@ -15,8 +15,13 @@
       </div>
     </div>
 
-    <div class="generic-content">
-        <?php the_content()    ?>
+    <div class="grid">
+        <div>
+        <?php the_post_thumbnail();?>    
+        </div>
+        <div>
+            <?php the_content() ?>
+        </div>
     </div>
     <?php
         $relatedPrograms = get_field('related_programs');

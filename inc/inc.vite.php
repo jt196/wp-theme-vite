@@ -69,6 +69,7 @@ add_action( 'wp_enqueue_scripts', function() {
 
 function university_features() {
     add_theme_support( 'title-tag' );
+    add_theme_support('post-thumbnails');
     register_nav_menu( 'headerMenuLocation', 'Header Menu Location' );
     register_nav_menu( 'footerLocation1', 'Footer Location 1' );
     register_nav_menu( 'footerLocation2', 'Footer Location 2' );

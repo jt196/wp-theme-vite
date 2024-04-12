@@ -50,8 +50,14 @@
           echo '<h2>' . get_the_title() . ' Professors</h2>';
           while($relatedProfessors->have_posts()) {
             $relatedProfessors->the_post(); ?>
-            <li>
-              <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            <div class="grid">
+              <div>
+                <?php the_post_thumbnail();?>
+              </div>
+              <div>
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+              </div>
+            </div>
             </li>
           <?php }
           }
