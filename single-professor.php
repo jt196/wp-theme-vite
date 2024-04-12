@@ -3,17 +3,9 @@
     get_header();
 
     while(have_posts()){
-        the_post(); ?>
-        
-        <div>
-      <div style="background-image: url(<?php echo get_theme_file_uri('/assets/img/ocean.jpg') ?>"></div>
-      <div>
-        <h1><?php the_title(); ?></h1>
-        <div>
-          <p>TODO subheader.</p>
-        </div>
-      </div>
-    </div>
+        the_post(); 
+        pageBanner();
+        ?>
 
     <div class="grid">
         <div>

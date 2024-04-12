@@ -1,19 +1,12 @@
 <?php 
 
-    get_header(); ?>
+    get_header(); 
+    pageBanner(array(
+        'title' => 'All Events',
+        'subtitle' => 'See what is going on in our world'
+    ))?>
 
     <div>
-      <div style="background-image: url(<?php echo get_theme_file_uri('/assets/img/ocean.jpg') ?>">
-            <div>
-                <h1>
-                    All Events
-                </h1>
-                <div>
-                    <p>See all events</p>
-                </div>
-            </div>
-        </div>
-
         <div class="container">
         
         <?php

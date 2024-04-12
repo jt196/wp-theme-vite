@@ -1,5 +1,4 @@
     </main>
-
     <footer class="container" >
         <div>
             <p>Currently in <strong><?php echo (IS_VITE_DEVELOPMENT) ? "development" : "production" ?></strong> mode.</p>

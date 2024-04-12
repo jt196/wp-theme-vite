@@ -1,19 +1,12 @@
 <?php 
 
-    get_header(); ?>
+    get_header(); 
+    pageBanner(array(
+        'title' => 'All Programs',
+        'subtitle' => 'See all programs'
+    ))?>
 
     <div>
-      <div style="background-image: url(<?php echo get_theme_file_uri('/assets/img/ocean.jpg') ?>">
-            <div>
-                <h1>
-                    All Programs
-                </h1>
-                <div>
-                    <p>See all programs</p>
-                </div>
-            </div>
-        </div>
-
         <div class="container">
         <ul>
             <?php
