@@ -28,6 +28,34 @@
     </div>
     <?php
         $today = date('Ymd');
+        $relatedProfessors = new WP_Query(array(
+          'posts_per_page' => -1,
+          'post_type' => 'professor',
+          'orderby' => 'title',
+          'order' => 'ASC',
+          'meta_query' => array(
+            array(
+              'key' => 'related_programs',
+              'compare' => 'LIKE',
+              // Wordpress saves the related programs as an array of IDs
+              // so to search through the array we need to search for numbers wrapped in quotes
+              'value' => '"' . get_the_ID() . '"'
+            )
+          )
+        ));
+        // var_dump($relatedProfessors->posts); 
+        if ($relatedProfessors->have_posts()) {
+          // print_r($relatedProfessors);
+          echo '<hr>';
+          echo '<h2>' . get_the_title() . ' Professors</h2>';
+          while($relatedProfessors->have_posts()) {
+            $relatedProfessors->the_post(); ?>
+            <li>
+              <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            </li>
+          <?php }
+          }
+        wp_reset_postdata();
         $homepageEvents = new WP_Query(array(
           'posts_per_page' => -1,
           'post_type' => 'event',
