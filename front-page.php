@@ -8,55 +8,77 @@
 </div>
 
 <div class="grid">
-      <div>
-          <h2>Upcoming Events</h2>
+  <div>
+    <h2>Upcoming Events</h2>
+    <?php
+        $today = date('Ymd');
+        $homepageEvents = new WP_Query(array(
+          'posts_per_page' => 2,
+          'post_type' => 'event',
+          'meta_key' => 'event_date',
+          'orderby' => 'meta_value_num',
+          'order' => 'ASC',
+          'meta_query' => array(
+            array(
+              'key' => 'event_date',
+              'compare' => '>=',
+              'value' => $today,
+              'type' => 'numeric'
+            )
+          )
+        ));
 
+        while($homepageEvents->have_posts()) {
+          $homepageEvents->the_post(); 
+          $eventDate = new DateTime(get_field('event_date'));
+          $eventMonth = $eventDate->format('M');
+          $eventDay = $eventDate->format('d');
+          ?>
           <div>
-            <a href="#">
-              <span>Mar</span>
-              <span>25</span>
+            <a href="<?php the_permalink(); ?>">
+              <span><?php echo $eventMonth; ?></span>
+              <span><?php echo $eventDay; ?></span>
             </a>
             <div>
-              <h5><a href="#">Poetry in the 100</a></h5>
-              <p>Bring poems you&rsquo;ve wrote to the 100 building this Tuesday for an open mic and snacks. <a href="#">Learn more</a></p>
+              <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+              <p><?php if(has_excerpt()){
+               echo get_the_excerpt();
+              } else {
+                echo wp_trim_words(get_the_content(), 18);
+              } ?> <a href="<?php the_permalink(); ?>">Read more</a></p>
             </div>
-          </div>
+          </div> 
+        <?php } wp_reset_postdata();
+        ?>
+ 
+    <p><a href="<?php get_post_type_archive_link('event') ?>">View All Events</a></p>
+  </div>
+  <div>
+    <h2>From Our Blogs</h2>
+    <?php
+        $homepagePosts = new WP_Query(array(
+          'posts_per_page' => 2
+        ));
+
+        while($homepagePosts->have_posts()) {
+          $homepagePosts->the_post(); ?>
           <div>
-            <a href="#">
-              <span>Apr</span>
-              <span>02</span>
+            <a href="<?php the_permalink(); ?>">
+              <span><?php the_time('M'); ?></span>
+              <span><?php the_time('d '); ?></span>
             </a>
             <div>
-              <h5><a href="#">Quad Picnic Party</a></h5>
-              <p>Live music, a taco truck and more can found in our third annual quad picnic day. <a href="#">Learn more</a></p>
+              <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+              <p><?php if(has_excerpt()){
+                echo get_the_excerpt();
+              } else {
+                echo wp_trim_words(get_the_content(), 18);
+              } ?> <a href="<?php the_permalink(); ?>">Read more</a></p>
             </div>
-          </div>
-
-          <p><a href="#">View All Events</a></p>
-      </div>
-    <div>
-        <h2>From Our Blogs</h2>
-        <?php
-            $homepagePosts = new WP_Query(array(
-              'posts_per_page' => 2
-            ));
-
-            while($homepagePosts->have_posts()) {
-              $homepagePosts->the_post(); ?>
-              <div>
-                <a href="<?php the_permalink(); ?>">
-                  <span><?php the_time('M'); ?></span>
-                  <span><?php the_time('d '); ?></span>
-                </a>
-                <div>
-                  <h5><a href="#"><?php the_title(); ?></a></h5>
-                  <p><?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink(); ?>">Read more</a></p>
-                </div>
-              </div> 
-            <?php } wp_reset_postdata();
-            ?>
-        </div>
-    </div>
+          </div> 
+        <?php } wp_reset_postdata();
+        ?>
+  </div>
 </div>
 <div id="svelte-slider"></div>
 
