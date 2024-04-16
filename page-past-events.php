@@ -27,16 +27,8 @@
             ));
         while($pastEvents->have_posts()) {
             $pastEvents->the_post(); 
-            $eventDate = new DateTime(get_field('event_date'));
-            $eventMonth = $eventDate->format('M');
-            $eventDay = $eventDate->format('d');
+            get_template_part('template-parts/content-event');
             ?>
-            <div>
-                <a href="<?php the_permalink(); ?>">
-                <span><?php echo $eventMonth; ?></span>
-                <span><?php echo $eventDay; ?></span>
-                </a>
-            </div>      
             <div>
                 <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                 <p><?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink(); ?>">Read more</a></p>

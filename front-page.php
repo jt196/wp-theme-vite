@@ -30,28 +30,14 @@
 
         while($homepageEvents->have_posts()) {
           $homepageEvents->the_post(); 
-          $eventDate = new DateTime(get_field('event_date'));
-          $eventMonth = $eventDate->format('M');
-          $eventDay = $eventDate->format('d');
+          get_template_part('template-parts/content', 'event');
           ?>
-          <div>
-            <a href="<?php the_permalink(); ?>">
-              <span><?php echo $eventMonth; ?></span>
-              <span><?php echo $eventDay; ?></span>
-            </a>
-            <div>
-              <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-              <p><?php if(has_excerpt()){
-               echo get_the_excerpt();
-              } else {
-                echo wp_trim_words(get_the_content(), 18);
-              } ?> <a href="<?php the_permalink(); ?>">Read more</a></p>
-            </div>
-          </div> 
         <?php } wp_reset_postdata();
         ?>
  
-    <p><a href="<?php get_post_type_archive_link('event') ?>">View All Events</a></p>
+ <button>
+  <a href="<?php echo get_post_type_archive_link('event') ?>">View All Events</a>
+ </button>
   </div>
   <div>
     <h2>From Our Blogs</h2>
