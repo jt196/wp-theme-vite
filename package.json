@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@picocss/pico": "^2.0.6",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "autoprefixer": "^10.4.14",
@@ -15,7 +16,11 @@
     "postcss": "^8.4.21",
     "postcss-nested": "^6.0.1",
     "svelte": "^4.2.12",
+    "svelte-fa": "^4.0.2",
     "vite": "^5.2.8",
     "vite-plugin-live-reload": "^3.0.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2"
   }
 }

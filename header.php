@@ -14,10 +14,16 @@
             <ul>
                 <li><a href="<?php echo home_url() ?>">Logo</a></li>
             </ul>
-            <?php wp_nav_menu(array('theme_location' => 'headerMenuLocation')); ?>
+            <div id="menu-utils">
+                <?php wp_nav_menu(array('theme_location' => 'headerMenuLocation')); ?>
+                <li>
+                        <div id="svelte-search"></div>
+                    </li>
+            </div>
+            
         </nav>
     </header>
 
-    
+
     <main class="container">
 

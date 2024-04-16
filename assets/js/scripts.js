@@ -1,5 +1,6 @@
 import "@picocss/pico";
 import Slider from "../svelte/Slider.svelte";
+import Search from "../svelte/Search.svelte";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Handler when the DOM is fully loaded
@@ -16,4 +17,8 @@ const slider = new Slider({
       "wp-content/themes/wp-theme-vite/assets/img/bus.jpg",
     ],
   },
+});
+
+const search = new Search({
+  target: document.getElementById("svelte-search"),
 });
