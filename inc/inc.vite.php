@@ -127,3 +127,20 @@ function university_adjust_queries( $query ) {
 }
 
 add_action('pre_get_posts', 'university_adjust_queries' );
+
+
+/**
+ * Registers a custom REST API field for the 'post' post type to retrieve the author's name.
+ *
+ * @param string $paramname Description of the parameter
+ * @return mixed Returns the author's name
+ */
+function university_custom_rest() {
+    register_rest_field('post', 'authorName', array(
+        'get_callback' => function() {
+            return get_the_author();
+        }
+    ));
+}
+
+add_action('rest_api_init', 'university_custom_rest');

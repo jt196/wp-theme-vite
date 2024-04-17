@@ -131,8 +131,14 @@
             {#if search && spinnerVisible}
               <Spinner />
             {:else if searchResults.length > 0}
-              {#each searchResults as event}
-                <a href={event.link}>{event.title.rendered}</a>
+              {#each searchResults as post}
+                <a href={post.link}>{post.title.rendered}</a>
+                {#if post.authorName}
+                  <span>
+                    by <a href={post._links.author[0].href}>{post.authorName}</a
+                    ></span
+                  >
+                {/if}
                 <hr />
               {/each}
             {:else if search && !spinnerVisible}
