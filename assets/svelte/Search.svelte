@@ -7,20 +7,30 @@
   let search = "";
   let spinnerVisible = false;
   let searchTimer;
-  let searchResults = [];
+  let searchResults = resetSearch();
   import { onMount } from "svelte";
 
   function handleKeydown(event) {
     if (event.key === "Escape" && isDialogOpen) {
       isDialogOpen = false;
       search = "";
-      searchResults = "";
+      searchResults = resetSearch();
     }
+  }
+
+  function resetSearch() {
+    return {
+      generalInfo: [],
+      events: [],
+      programs: [],
+      professors: [],
+    };
   }
 
   async function handleSearch() {
     spinnerVisible = false;
     searchResults = await getSearchResults(search, postTypes);
+    console.log("🚀 ~ handleSearch ~ searchResults:", searchResults);
     console.log("search: ", search);
   }
 
@@ -39,38 +49,11 @@
 
   async function getSearchResults(searchString, postTypes) {
     let origin = window.location.origin;
-    let promises = [];
-
-    for (let type of postTypes) {
-      // Create a fetch promise for each post type
-      let promise = fetch(
-        `${origin}/wp-json/wp/v2/${type}?search=${encodeURIComponent(searchString)}`
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.length === 0) {
-            console.log(`No results found for type ${type}.`);
-          }
-          return data;
-        })
-        .catch((error) => {
-          console.error(`Failed to fetch ${type}: `, error);
-          return []; // Return an empty array in case of error to keep consistency in results structure
-        });
-
-      promises.push(promise);
-    }
-
-    // Wait for all promises to resolve
-    const results = await Promise.all(promises);
-
-    // Flatten the array of results (since each fetch returns an array)
-    return results.flat();
+    let results = [];
+    results = await fetch(
+      `${origin}/wp-json/university/v1/search?term=${encodeURIComponent(searchString)}`
+    );
+    return results.json();
   }
 
   let postTypes = ["posts", "pages", "event"];
@@ -92,14 +75,14 @@
   function closeSearchDialog() {
     isDialogOpen = false;
     search = "";
-    searchResults = "";
+    searchResults = resetSearch();
   }
 
   onMount(() => {
     dialog.addEventListener("close", () => {
       isDialogOpen = false;
       search = "";
-      searchResults = "";
+      searchResults = resetSearch();
     });
     document.addEventListener("keydown", handleKeydown);
     return () => {
@@ -119,6 +102,7 @@
       <input
         type="text"
         name="search"
+        id="search-input"
         bind:value={search}
         on:input={searchTimerSet}
         placeholder="Search events..."
@@ -130,17 +114,64 @@
           <ul>
             {#if search && spinnerVisible}
               <Spinner />
-            {:else if searchResults.length > 0}
-              {#each searchResults as post}
-                <a href={post.link}>{post.title.rendered}</a>
-                {#if post.authorName}
-                  <span>
-                    by <a href={post._links.author[0].href}>{post.authorName}</a
-                    ></span
-                  >
+            {:else if searchResults.generalInfo.length > 0 || searchResults.events.length > 0 || searchResults.programs.length > 0 || searchResults.professors.length > 0}
+              <div class="grid">
+                {#if searchResults.generalInfo.length > 0}
+                  <div>
+                    <h1>Pages</h1>
+                    {#each searchResults.generalInfo as post}
+                      <a href={post.permalink}>{post.title}</a>
+                      <span>by {post.authorName}</span>
+                      <hr />
+                    {/each}
+                  </div>
                 {/if}
-                <hr />
-              {/each}
+                {#if searchResults.events.length > 0}
+                  <div class="event-summary">
+                    <h1>Events</h1>
+                    {#each searchResults.events as event}
+                      <a
+                        class="event-summary__date t-center"
+                        href={event.permalink}
+                      >
+                        <span class="event-summary__month">{event.month}</span>
+                        <span class="event-summary__day">{event.day}</span>
+                      </a>
+                      <div class="event-summary__content">
+                        <h5
+                          class="event-summary__title headline headline--tiny"
+                        >
+                          <a href={event.permalink}>{event.title}</a>
+                        </h5>
+                        <p>{event.description}</p>
+                      </div>
+                      <hr />
+                    {/each}
+                  </div>
+                {/if}
+                {#if searchResults.professors.length > 0}
+                  <div>
+                    <h1>Professors</h1>
+                    {#each searchResults.professors as professor}
+                      <a href={professor.permalink}>{professor.title}</a>
+                      <img
+                        src={professor.image}
+                        alt="{professor.title} image"
+                      />
+                      <hr />
+                    {/each}
+                  </div>
+                {/if}
+                {#if searchResults.programs.length > 0}
+                  <div>
+                    <h1>Programs</h1>
+                    {#each searchResults.programs as program}
+                      <a href={program.permalink}>{program.title}</a>
+                      <hr />
+                    {/each}
+                  </div>
+                {/if}
+              </div>
             {:else if search && !spinnerVisible}
               <p>No events found for your search.</p>
             {/if}
@@ -157,8 +188,15 @@
 </dialog>
 
 <style>
-  #search-results ul,
-  #search-results li {
+  #search-results ul {
     display: block;
+    margin: 0;
+  }
+  #search-input {
+    margin-bottom: 1rem;
+  }
+
+  dialog article {
+    max-width: 900px;
   }
 </style>

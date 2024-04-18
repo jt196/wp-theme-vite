@@ -25,6 +25,8 @@ define('JS_LOAD_IN_FOOTER', true); // load scripts in footer?
 define('VITE_SERVER', 'http://localhost:3000');
 define('VITE_ENTRY_POINT', '/main.js');
 
+require get_theme_file_path('inc/search-route.php');
+
 // enqueue hook
 add_action( 'wp_enqueue_scripts', function() {
     
