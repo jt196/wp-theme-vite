@@ -156,3 +156,12 @@ body.admin-bar {
 #menu-utils {
   display: flex;
 }
+
+.header-button {
+  padding: 0.3rem;
+}
+
+.header-avatar img {
+  width: 30px;
+  height: 30px;
+}
