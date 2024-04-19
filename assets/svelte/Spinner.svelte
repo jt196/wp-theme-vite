@@ -16,7 +16,8 @@
     border-radius: 50%;
     width: 24px;
     height: 24px;
-    border: 0.25rem solid rgba(0, 0, 0, 0.2);
+    color: white;
+    border: 0.25rem solid var(--pico-color);
     border-top-color: black;
     -webkit-animation: spin 1s infinite linear;
     animation: spin 1s infinite linear;

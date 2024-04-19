@@ -26,6 +26,7 @@ define('VITE_SERVER', 'http://localhost:3000');
 define('VITE_ENTRY_POINT', '/main.js');
 
 require get_theme_file_path('inc/search-route.php');
+require get_theme_file_path('inc/notes.php');
 
 // enqueue hook
 add_action( 'wp_enqueue_scripts', function() {
